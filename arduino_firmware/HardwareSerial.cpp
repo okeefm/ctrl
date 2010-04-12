@@ -113,7 +113,7 @@ HardwareSerial::HardwareSerial(ring_buffer *rx_buffer,
   volatile uint8_t *ubrrh, volatile uint8_t *ubrrl,
   volatile uint8_t *ucsra, volatile uint8_t *ucsrb,
   volatile uint8_t *udr,
-  uint8_t rxen, uint8_t txen, uint8_t rxcie, uint8_t udre)
+uint8_t rxen, uint8_t txen, uint8_t rxcie, uint8_t udre)
 {
   _rx_buffer = rx_buffer;
   _ubrrh = ubrrh;
@@ -125,6 +125,25 @@ HardwareSerial::HardwareSerial(ring_buffer *rx_buffer,
   _txen = txen;
   _rxcie = rxcie;
   _udre = udre;
+}
+
+HardwareSerial::HardwareSerial(ring_buffer *rx_buffer,
+  volatile uint8_t *ubrrh, volatile uint8_t *ubrrl,
+  volatile uint8_t *ucsra, volatile uint8_t *ucsrb,
+  volatile uint8_t *udr,
+uint8_t rxen, uint8_t txen, uint8_t rxcie, uint8_t udre, uint8_t u2x)
+{
+  _rx_buffer = rx_buffer;
+  _ubrrh = ubrrh;
+  _ubrrl = ubrrl;
+  _ucsra = ucsra;
+  _ucsrb = ucsrb;
+  _udr = udr;
+  _rxen = rxen;
+  _txen = txen;
+  _rxcie = rxcie;
+  _udre = udre;
+  _u2x = u2x;
 }
 
 // Public Methods //////////////////////////////////////////////////////////////

@@ -51,6 +51,7 @@ volatile byte zerocounter = 0;
 
 /******************************* LED PWM variable declarations *****************************/
 byte LED_PINS[] = {9,10,11}; //these are the addresses for the three LED arrays
+#define NUM_PINS 3
 
 void setup() {
   
