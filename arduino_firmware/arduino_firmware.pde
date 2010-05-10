@@ -12,7 +12,7 @@
 /******************************* Addressing variable declarations *****************************/
 
 #include <EEPROM.h>
-#define NUMBER_OF_CHANNELS 8
+#define NUMBER_OF_CHANNELS 3
 //the number of channels we want to receive (8 by default).
 
 #define SWITCH_PIN_0 11 //the pin number of our "0" switch
@@ -50,7 +50,7 @@ volatile byte zerocounter = 0;
 *  the timer2 ISR actually checks for 22 zeros in a row, for the full 88uS break.       */
 
 /******************************* LED PWM variable declarations *****************************/
-byte LED_PINS[] = {9,10,11}; //these are the addresses for the three LED arrays
+byte LED_PINS[] = {9,10,6}; //these are the addresses for the three LED arrays
 #define NUM_PINS 3
 
 void setup() {
@@ -58,7 +58,7 @@ void setup() {
   /*******************************LED Pin configuration ***********************************/
   for (int i = 0; i < NUM_PINS; i++)
   {
-    pinMode(i, OUTPUT);
+    pinMode(LED_PINS[i], OUTPUT);
   }  
   /******************************* Max485 configuration ***********************************/
   
@@ -80,6 +80,9 @@ void setup() {
   byte switch0 = 0;  //the switch states for the 1 and 0 pin 
   switch0 = digitalRead(SWITCH_PIN_0);
   switch1 = digitalRead(SWITCH_PIN_1);
+  
+  EEPROM.write(510, lowByte(dmxaddress));
+  EEPROM.write(511, highByte(dmxaddress));
   
   //if (switch0 == 0 || switch1 == 0)
   //{
@@ -152,6 +155,7 @@ void loop()  {
     i = 0;
     bitSet(TIMSK2, OCIE2A);    //Enable Timer/Counter2 Output Compare Match A Interrupt
   }
+  action();
 } //end loop()
 
 
