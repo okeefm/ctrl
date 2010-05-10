@@ -81,11 +81,11 @@ void setup() {
   switch0 = digitalRead(SWITCH_PIN_0);
   switch1 = digitalRead(SWITCH_PIN_1);
   
-  if (switch0 == 0 || switch1 == 0)
-  {
-  Addressing(switch0, switch1);
+  //if (switch0 == 0 || switch1 == 0)
+  //{
+  //Addressing(switch0, switch1);
   //call the addressing subroutine if either switch is pressed.
-  }
+  //}
 
   //read the previously stored value from EEPROM addresses 510 and 511.
   dmxaddress = EEPROM.read(511);   //read the high byte into dmxaddress
